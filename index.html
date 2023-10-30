@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>ChatGPT API Example</title>
+</head>
+<body>
+  <h1>ChatGPT API Example</h1>
+  <div>
+    <label for="userMessage">Enter your message:</label>
+    <input type="text" id="userMessage">
+    <button onclick="sendMessage()">Send</button>
+  </div>
+  <div id="chatOutput">
+    <p>ChatGPT: Hello! How can I assist you today?</p>
+  </div>
+
+  <script>
+    // 设置API端点和API密钥
+    const apiEndpoint = 'https://api.openai.com/v1/chat/completions';
+    const apiKey = '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';
+
+    function sendMessage() {
+      const userMessage = document.getElementById('userMessage').value;
+      if (userMessage) {
+        // 构建请求数据
+        const requestData = {
+          model: 'gpt-3.5-turbo',
+          messages: [
+            { role: 'user', content: '請將以下詞彙組合成一段優美的句子:'+userMessage }
+          ]
+        };
+        alert(requestData);
+
+        // 发起API请求
+        fetch(apiEndpoint, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${apiKey}`
+          },
+          body: JSON.stringify(requestData)
+        })
+        .then(response => response.json())
+        .then(data => {
+          const chatOutput = document.getElementById('chatOutput');
+          const assistantResponse = data.choices[0].message.content;
+          chatOutput.innerHTML += `<p>User: ${userMessage}</p><p>ChatGPT: ${assistantResponse}</p>`;
+        })
+        .catch(error => console.error('API請求出錯：', error));
+
+        // 清除用户输入
+        document.getElementById('userMessage').value = '';
+      }
+    }
+  </script>
+</body>
+</html>
