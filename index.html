@@ -31,6 +31,14 @@
               <div class="line">
                  <h2>My Wonderland 詞句組合</h2>
                   <div>
+                    <label for="tid">桌號:<br></label>
+                    <input type="text" id="tid">
+                    <br>
+                    <br>
+                    <label for="userid">優勝者:<br></label>
+                    <input type="text" id="userid">
+                    <br>
+                    <br>
                     <label for="attraction">景點名稱:<br></label>
                     <input type="text" id="attraction">
                     <br>
@@ -45,8 +53,9 @@
                   </div>
                   <br>
                   <br>
-                  <form method='POST' action='https://script.google.com/macros/s/AKfycbzQHl1HX_Eoam7JlR2Eo31XTwnkjfpTAWGm-ZvcKK_SGusDPXewWUkpL5OEkik22ySW/exec'>
+                  <form method='POST' action='https://script.google.com/macros/s/AKfycbyUH_dIn_E8igguUcnKXoEKcYGx2ZZcJioU4fQziqbGHBr7EcwVsaxBszOp1sCsZGAw/exec'>
                   <textarea rows="6" cols="30" name="msg" id="msg"></textarea><br>
+                  
 
                   <input type="submit" />
                 </form>
@@ -100,6 +109,10 @@
                        '建築物','天際線','輕舟','飛鳥','晚霞'
                     ];
 
+           const tid = document.getElementById('tid');
+           const userid = document.getElementById('userid');
+           
+
            const attraction = document.getElementById('attraction');
            const msg = document.getElementById('msg');
            msg.value = "";
@@ -126,11 +139,11 @@
                if(t1.length>1) t1=t1.substring(0,t1.length-1);
                if(t2.length>1) t2="，畫面中的元素包含" + t2.substring(0,t2.length-1);
                
-               msg.value = "一幅" + t1 + attraction.value + "景色" + t2 + "。";
+               msg.value = "\n桌號：" + tid.value + "\n優勝者：" + userid.value + "\n\n一幅" + t1 + attraction.value + "景色" + t2 + "。";
            }
            catch
            {
-                 msg.value = "error!";
+                 msg.value = "發生錯誤!";
            }
 
          }
