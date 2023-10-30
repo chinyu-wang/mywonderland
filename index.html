@@ -1,7 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>My Wonderland</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wonderland</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 </head>
 <body>
     <center>
@@ -16,22 +19,23 @@
         <br>
         <br>
 
-        <button onclick="sendMessage()">詞句組合</button>
-        <br>
-        <br>
-        <button id="sendButton">繳&nbsp;&nbsp;送</button>
-
+        <button onclick="mySentence()">詞句組合</button>
+        
       </div>
       <br>
       <br>
       <div id="output">
         <p>My Wonderland: 善用AI發揮創意，打造心中美麗世界，展開新奇探索旅程。</p>
       </div>
+      <br>
+        <br>
+        <button onclick="mySubmit()">繳&nbsp;&nbsp;送</button>
+
     </center>
 
-    <script>
+    <script crossorigin="use-credentials">
 
-    function sendMessage() {
+    function mySentence() {
       const cardlist = document.getElementById('cardlist').value;
       if (cardlist) {
         var card=[  '壯觀的','遼闊的','迷人的','雄偉的','碧綠的','蔚藍的','多彩的','高聳的',
@@ -77,46 +81,18 @@
       }
 
 
+    }
+
+
+    function mySubmit()
+    {
+        var myMessage = document.getElementById('output').value;
+        console.log(myMessage);
+        let url = 'https://script.google.com/macros/s/AKfycbz9L1xMP49gXMd9Bm_LVq7NPK29xEH9xQ0_4i6gKHu1IkFSlebT7MzodjAioPSwpJOx/exec';
+        $.post(url,
+            {msg:myMessage}
+        )
         
-        
-        const accessToken = 'McXxU5YAzp9PWiDZC9qKal7hyDDnwHJ1AOeMuYKDQeZViEufYWR0bjrfmBCcHfBG0mee0nLvBUIAwW9D6/80QoPJw26ceScvZnwIZ01kIN4JgC7qvQb0+5nfDMt4NoQnDktyP82BD5/Z5heIFkLRzwdB04t89/1O/w1cDnyilFU=';
-
-        
-        const message = {
-          to: 'U6ba7b948ca4f1288456df0f3065b5b10', 
-          messages: [
-            {
-              type: 'text',
-              text: output.innerHTML,
-            },
-          ],
-        };
-
-
-        
-        // 发送消息函数
-        const sendMessage = () => {
-            
-          const xhr = new XMLHttpRequest();
-          const url = 'https://api.line.me/v2/bot/message/push';
-          xhr.open('POST', url, true);
-          xhr.setRequestHeader('Content-Type', 'application/json');
-          xhr.setRequestHeader('Authorization', `Bearer ${accessToken}`);
-          xhr.onreadystatechange = function () {
-            if (xhr.readyState === 4 && xhr.status === 200) {
-              output.innerHTML+='傳送成功.';
-            } else {
-              output.innerHTML+='傳送失敗:' + xhr.responseText;
-            }
-          };
-          xhr.send(JSON.stringify(message));
-        };
-        
-
-    const sendButton = document.getElementById('sendButton');
-    sendButton.addEventListener('click', sendMessage);
-
-
     }
     </script>
 </body>
