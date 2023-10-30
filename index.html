@@ -16,7 +16,11 @@
         <br>
         <br>
 
-        <button onclick="sendMessage()">確&nbsp;&nbsp;定</button>
+        <button onclick="sendMessage()">詞句組合</button>
+        <br>
+        <br>
+        <button id="sendButton">繳&nbsp;&nbsp;送</button>
+
       </div>
       <br>
       <br>
@@ -89,9 +93,10 @@
         };
 
 
-        alert('test');
+        
         // 发送消息函数
         const sendMessage = () => {
+            
           const xhr = new XMLHttpRequest();
           const url = 'https://api.line.me/v2/bot/message/push';
           xhr.open('POST', url, true);
@@ -106,9 +111,10 @@
           };
           xhr.send(JSON.stringify(message));
         };
-        alert('test');
+        
 
-
+    const sendButton = document.getElementById('sendButton');
+    sendButton.addEventListener('click', sendMessage);
 
 
     }
