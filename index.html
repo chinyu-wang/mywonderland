@@ -1,57 +1,79 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>ChatGPT API Example</title>
+  <title>My Wonderland</title>
 </head>
 <body>
-  <h1>ChatGPT API Example</h1>
-  <div>
-    <label for="userMessage">Enter your message:</label>
-    <input type="text" id="userMessage">
-    <button onclick="sendMessage()">Send</button>
-  </div>
-  <div id="chatOutput">
-    <p>ChatGPT: Hello! How can I assist you today?</p>
-  </div>
+    <center>
+      <h1>My Wonderland 詞句組合</h1>
+      <div>
+        <label for="attraction">景點名稱:<br></label>
+        <input type="text" id="attraction">
+        <br>
+        <br>
+        <label for="cardlist">詞卡編號(以,隔開):<br></label>
+        <input type="text" id="cardlist">
+        <br>
+        <br>
 
-  <script>
-    // 设置API端点和API密钥
-    const apiEndpoint = 'https://api.openai.com/v1/chat/completions';
-    const apiKey = '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';
+        <button onclick="sendMessage()">確&nbsp;&nbsp;定</button>
+      </div>
+      <br>
+      <br>
+      <div id="output">
+        <p>My Wonderland: 善用AI發揮創意，打造心中美麗世界，展開新奇探索旅程。</p>
+      </div>
+    </center>
+
+    <script>
 
     function sendMessage() {
-      const userMessage = document.getElementById('userMessage').value;
-      if (userMessage) {
-        // 构建请求数据
-        const requestData = {
-          model: 'gpt-3.5-turbo',
-          messages: [
-            { role: 'user', content: '請將以下詞彙組合成一段優美的句子:'+userMessage }
-          ]
-        };
-        alert(requestData);
+      const cardlist = document.getElementById('cardlist').value;
+      if (cardlist) {
+        var card=[  '壯觀的','遼闊的','迷人的','雄偉的','碧綠的','蔚藍的','多彩的','高聳的',
+                    '蓬勃的','璀璨的','茂盛的','鮮豔的',
+                    '荒涼的','污染的','混亂的','沈悶的','無趣的','陰鬱的','黯淡的','死寂的',
+                    '山脈','河川','湖泊','瀑布','天空','星夜','雲朵','陽光','樹木','花朵',
+                    '建築物','天際線','輕舟','飛鳥','晚霞'
+                 ];
 
-        // 发起API请求
-        fetch(apiEndpoint, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${apiKey}`
-          },
-          body: JSON.stringify(requestData)
-        })
-        .then(response => response.json())
-        .then(data => {
-          const chatOutput = document.getElementById('chatOutput');
-          const assistantResponse = data.choices[0].message.content;
-          chatOutput.innerHTML += `<p>User: ${userMessage}</p><p>ChatGPT: ${assistantResponse}</p>`;
-        })
-        .catch(error => console.error('API請求出錯：', error));
+        const attraction = document.getElementById('attraction');
+        const output = document.getElementById('output');
+        output.innerHTML = "";
+        
+        try{
+            var t1="";
+            var t2="";
+            var arr = cardlist.split(",");
+            for(var i=0; i<arr.length; i++)
+            {
+                var d=parseInt(arr[i]);
+                if(d>=1 && d<=20)
+                {
+                    d--;
+                    t1 += card[d] + "、";
+                }
+                else if(d>=21 && d<=35)
+                {
+                    d--;
+                    t2 += card[d] + "、";
+                }
+            }
 
-        // 清除用户输入
-        document.getElementById('userMessage').value = '';
+            if(t1.length>1) t1=t1.substring(0,t1.length-1);
+            if(t2.length>1) t2="，畫面中的元素包含" + t2.substring(0,t2.length-1);
+            alert(t1);
+            alert(t2);
+
+            output.innerHTML = "一幅" + t1 + attraction.value + "景色" + t2 + "。";
+        }
+        catch
+        {
+              output.innerHTML = "error!";
+        }
+
       }
     }
-  </script>
+    </script>
 </body>
 </html>
