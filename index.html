@@ -39,7 +39,7 @@
                     <input type="text" id="userid">
                     <br>
                     <br>
-                    <label for="attraction">景點名稱:<br></label>
+                    <label for="attraction">ＭyWonderland名稱:<br></label>
                     <input type="text" id="attraction">
                     <br>
                     <br>
@@ -103,14 +103,17 @@
          const cardlist = document.getElementById('cardlist').value;
          if (cardlist) {
 
+           cardlist = cardlist.replace(/ /g, ",");
            cardlist = cardlist.replace(/，/g, ",");
+
            var card=[  '壯觀的','夕陽西下的','迷人的','雄偉的','碧綠的','蔚藍的','多彩多姿的','高聳的',
                        '繁花似錦的','璀璨奪目的','一望無際的','魅力四射的',
-                       '荒涼的','垃圾滿地的','一片混亂的','空氣污染的','黑白風格的','雜草叢生的','黯淡無光的','大火焚燒過的',
-                       '山脈','河川','湖泊','瀑布','天空','星夜','雲朵','陽光','樹木','花朵',
-                       '建築物','天際線','輕舟','飛鳥','晚霞'
+                       '荒涼的','垃圾滿地的','一片混亂的','空氣污染的','黑白風格的','野草叢生的','黯淡無光的','工廠林立的',
+                       '一座山脈','一條河川','一片森林','一條瀑布','一條海岸線','一片晴朗的天空','日出','日落','一道彩虹','滿天星光',
+                       '一輪皎潔明月','一片火燒雲','一顆樹木','一朵花','一片花海',
+                       '一棟古老建築','一條天際線','一葉輕舟','一隻飛鳥','一抹晚霞','一幅剪影','一隻小貓','一隻小狗','一個小孩','一座橋'
                     ];
-
+ 
            const tid = document.getElementById('tid');
            const userid = document.getElementById('userid');
            
@@ -131,7 +134,7 @@
                        d--;
                        t1 += card[d] + "、";
                    }
-                   else if(d>=21 && d<=35)
+                   else if(d>=21 && d<=45)
                    {
                        d--;
                        t2 += card[d] + "、";
@@ -139,7 +142,7 @@
                }
 
                if(t1.length>1) t1=t1.substring(0,t1.length-1);
-               if(t2.length>1) t2="，畫面中的元素包含" + t2.substring(0,t2.length-1);
+               if(t2.length>1) t2="，畫面中有" + t2.substring(0,t2.length-1) + "。";
                
                msg.value = "\n桌號：" + tid.value + "\n優勝者：" + userid.value + "\n\n一幅" + t1 + attraction.value + "景色" + t2 + "。";
            }
