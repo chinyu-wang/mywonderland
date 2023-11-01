@@ -43,7 +43,7 @@
                     <input type="text" id="attraction">
                     <br>
                     <br>
-                    <label for="cardlist">詞卡編號(以,隔開):<br></label>
+                    <label for="cardlist">詞卡編號(以空格隔開):<br></label>
                     <input type="text" id="cardlist">
                     <br>
                     <br>
@@ -103,7 +103,6 @@
          const cardlist = document.getElementById('cardlist').value;
          if (cardlist) {
 
-           cardlist = cardlist.replace(/，/g, ",");
 
            var card=[  '壯觀的','夕陽西下的','迷人的','雄偉的','碧綠的','蔚藍的','多彩多姿的','高聳的',
                        '繁花似錦的','璀璨奪目的','一望無際的','魅力四射的',
@@ -124,7 +123,7 @@
            try{
                var t1="";
                var t2="";
-               var arr = cardlist.split(",");
+               var arr = cardlist.split(" ");
                for(var i=0; i<arr.length; i++)
                {
                    var d=parseInt(arr[i]);
@@ -141,7 +140,7 @@
                }
 
                if(t1.length>1) t1=t1.substring(0,t1.length-1);
-               if(t2.length>1) t2="，畫面中有" + t2.substring(0,t2.length-1) + "。";
+               if(t2.length>1) t2="，畫面中有" + t2.substring(0,t2.length-1);
                
                msg.value = "\n桌號：" + tid.value + "\n優勝者：" + userid.value + "\n\n一幅" + t1 + attraction.value + "景色" + t2 + "。";
            }
