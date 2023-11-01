@@ -139,10 +139,13 @@
                    }
                }
 
-               if(t1.length>1) t1=t1.substring(0,t1.length-1);
-               if(t2.length>1) t2="，畫面中有" + t2.substring(0,t2.length-1);
+               if(t1.length>0) t1=t1.substring(0,t1.length-1);
+               if(t2.length>0) t2="，畫面中有" + t2.substring(0,t2.length-1);
                
-               msg.value = "\n桌號：" + tid.value + "\n優勝者：" + userid.value + "\n\n一幅" + t1 + attraction.value + "景色" + t2 + "。";
+               msg.value = "";
+               if(tid.value.length>0) { msg.value = msg.value + "\n桌號：" + tid.value; }
+               if(userid.value.length>0) { msg.value = msg.value +  "\n優勝者：" + userid.value; }
+               msg.value = msg.value + "\n一幅" + t1 + attraction.value + "景色" + t2 + "。";
            }
            catch
            {
